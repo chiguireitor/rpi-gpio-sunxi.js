@@ -1,10 +1,11 @@
 {
-  "name": "rpi-gpio",
-  "version": "0.7.0",
-  "description": "Control Raspberry Pi GPIO pins with node.js",
-  "main": "rpi-gpio.js",
+  "name": "rpi-gpio-sunxi",
+  "version": "0.1.0",
+  "description": "Control Orange Pi GPIO pins with node.js",
+  "main": "rpi-gpio-sunxi.js",
   "keywords:": [
     "raspberry",
+    "orange",
     "pi",
     "gpio"
   ],

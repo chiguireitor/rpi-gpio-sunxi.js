@@ -1,31 +1,34 @@
-rpi-gpio.js
+rpi-gpio-sunxi.js
 ==========
 
-Control Raspberry Pi GPIO pins with io.js / node.js
+## NOT WORKING
 
-[![Build Status](https://travis-ci.org/JamesBarwell/rpi-gpio.js.svg?branch=master)](https://travis-ci.org/JamesBarwell/rpi-gpio.js)
-[![NPM version](https://badge.fury.io/js/rpi-gpio.svg)](http://badge.fury.io/js/rpi-gpio)
+This repository isn't working yet. Stay tuned.
+
+Control Orange Pi ONE GPIO pins with io.js / node.js
 
 ## Setup
 See this guide on how to get [node.js running on Raspberry Pi](https://learn.adafruit.com/node-embedded-development/installing-node-dot-js).
 
 This module can then be installed with npm:
 ```
-npm install rpi-gpio
+npm install rpi-gpio-sunxi
 ```
+
+NOTE: This isn't working yet
 
 ### Dependency
 
 If you are having trouble installing this module make sure you are running gcc/g++ `-v 4.8` or higher. [Here](https://github.com/fivdi/onoff/wiki/Node.js-v4-and-native-addons) is an installation guide.
 
 ## Usage
-Firstly, make make sure you are running your application as root or with sudo, else the Raspberry Pi will not let you output to the GPIO.
+Firstly, make make sure you are running your application as root or with sudo, else the Orange Pi will not let you output to the GPIO.
 
 Before you can read or write, you must use setup() to open a channel, and must specify whether it will be used for input or output. Having done this, you can then read in the state of the channel or write a value to it using read() or write().
 
 All of the functions relating to the pin state within this module are asynchronous, so where necessary - for example in reading the value of a channel - a callback must be provided. This module inherits the standard [EventEmitter](http://nodejs.org/api/events.html), so you may use its functions to listen to events.
 
-Please note that there are two different and confusing ways to reference a channel; either using the Raspberry Pi or the BCM/SoC naming schema (sadly, neither of which match the physical pins!). This module supports both schemas, with Raspberry Pi being the default. Please see [this page](http://elinux.org/RPi_Low-level_peripherals) for more details.
+Channel naming follows Orange Pi One naming from the gpio_sunxi kernel module.
 
 ## API
 
@@ -52,7 +55,7 @@ Writes the value of a channel.
 
 #### setMode(mode)
 Sets the channel addressing schema.
-* mode: Specify either Raspberry Pi or SoC/BCM pin schemas, by passing MODE_RPI or MODE_BCM. Defaults to MODE_RPI.
+* mode: Specify either Orange Pi or SoC/BCM pin schemas, by passing MODE_RPI or MODE_BCM. Defaults to MODE_RPI.
 
 #### input()
 Alias of read().
@@ -231,19 +234,3 @@ function delayedWrite(pin, value, callback) {
 ## Contributing
 Contributions are appreciated, both in the form of bug reports and pull requests.
 
-Due to the nature of this project it can be quite time-consuming to test against real hardware, so the automated test suite is all the more important. I will not accept any pull requests that cause the build to fail, and probably will not accept any that do not have corresponding test coverage.
-
-You can run the tests with npm:
-```
-npm test
-```
-and create a coverage report with:
-```
-npm run coverage
-```
-There is also an integration test that you can run on Raspberry Pi hardware, having connected two GPIO pins across a resistor. The command to run the test will provide further instructions on how to set up the hardware:
-```
-npm run int
-```
-
-The tests use [mochajs](http://mochajs.org) as the test framework, and [Sinon.JS](http://sinonjs.org) to stub and mock out file system calls.
